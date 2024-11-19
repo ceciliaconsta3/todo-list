@@ -19,7 +19,7 @@ Develop a basic command-line To-Do List application in Golang that allows users 
 
 ### Task Completion
 
-* [ ] Implement the ability for users to mark tasks as completed.
+* Implement the ability for users to mark tasks as completed.
 
 ### Basic User Interface
 
