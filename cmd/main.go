@@ -17,6 +17,7 @@ func main() {
 	fmt.Println("Enter 'complete' to mark a task as complete")
 	fmt.Println("Enter 'list' to see all tasks")
 	fmt.Println("Enter 'exit' to quit the app")
+	fmt.Println("Enter 'save' to save your tasks to a file")
 
 	// forgot to instanciate the TodoList struct
 	todoList := todo.TodoList{}
@@ -64,6 +65,10 @@ func main() {
 				continue
 			}
 			todoList.CompleteTask(iD)
+		case "save":
+			fmt.Println("Tasks successfully saved to file")
+			todoList.SaveTasksToFile()
+			continue
 		case "list":
 			fmt.Println("Here are all the tasks")
 			todoList.ListTasks()

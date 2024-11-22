@@ -2,6 +2,8 @@ package todo
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"todo-list/pkg/models"
 )
 
@@ -97,5 +99,33 @@ func (t *TodoList) CompleteTask(taskID int) {
 		}
 		// print out the entire list to see where we stand
 		fmt.Println("Tasks: ", t.Tasks)
+	}
+}
+
+func (t *TodoList) SaveTasksToFile() {
+	// save tasks to a file
+	// use the ioutil package to write to a file
+	if len(t.Tasks) == 0 {
+		fmt.Println("No tasks to save")
+		return
+	} else {
+		// create a new file
+		file, err := os.OpenFile("todo-list.txt", os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			log.Fatal("There was a problem opening the file: ", err)
+		}
+		defer file.Close()
+		// write to the file
+		for _, task := range t.Tasks {
+			taskStr := fmt.Sprintf("ID: %d, Name: %s, Completed: %v", task.ID, task.Name, task.Completed)
+			_, err := file.WriteString(taskStr + "\n")
+			if err != nil {
+				log.Fatal("There was a problem saving the file: ", err)
+			}
+		}
+		// print success message after all tasks are saved
+		fmt.Println("All tasks saved successfully")
+		// show where file was saved
+		fmt.Println("Todo List saved to todo-list.txt")
 	}
 }
